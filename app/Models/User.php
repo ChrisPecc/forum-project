@@ -40,4 +40,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function threads(){
+        return $this->hasMany('App\Thread');
+    }
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
+
 }
