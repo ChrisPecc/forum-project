@@ -42,11 +42,11 @@ class User extends Authenticatable
     ];
 
     public function threads(){
-        return $this->hasMany('App\Thread');
+        return $this->hasMany('App\Models\Thread');
     }
 
     public function posts(){
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Models\Post');
     }
 
 

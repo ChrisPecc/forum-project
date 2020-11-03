@@ -9,6 +9,8 @@ class Section extends Model
 {
     use HasFactory;
 
+    protected $table = 'sections';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,7 +21,7 @@ class Section extends Model
     ];
 
     public function subsections(){
-        return $this->hasMany('App\Subsection');
+        return $this->hasMany('App\Models\Subsection');
     }
     
 }

@@ -9,12 +9,19 @@ class Subsection extends Model
 {
     use HasFactory;
 
+    protected $table = 'subsections';
+
+    protected $fillable = [
+        'subsection_name',
+        'section_id'
+    ];
+
     public function section()
     {
-        return $this->belongsTo('App\Section');
+        return $this->belongsTo('App\Models\Section');
     }
 
     public function threads(){
-        return $this->hasMany('App\Thread');
+        return $this->hasMany('App\Models\Thread');
     }
 }

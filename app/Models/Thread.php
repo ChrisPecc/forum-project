@@ -11,15 +11,15 @@ class Thread extends Model
 
     public function subsection()
     {
-        return $this->belongsTo('App\Subsection');
+        return $this->belongsTo('App\Models\Subsection');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function posts(){
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Models\Post');
     }
 }

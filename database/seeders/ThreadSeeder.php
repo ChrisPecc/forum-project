@@ -23,7 +23,7 @@ class ThreadSeeder extends Seeder
         DB::table('threads')-> insert([
             'thread_name' => 'Thread test2',
             'user_id' => 1,
-            'subsection_id' => 17
+            'subsection_id' => 18
         ]);
     }
 }

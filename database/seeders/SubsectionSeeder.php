@@ -16,6 +16,7 @@ class SubsectionSeeder extends Seeder
     {
         $generalSubsections = [
             'Actualités',
+            'Littérature',
             'Films, Séries & Animation',
             'BD, comics, mangas & autres',
             'Musique',

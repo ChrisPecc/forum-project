@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SectionDisplayController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ThreadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SectionDisplayController::class, 'welcome']) -> name('welcome');
+Route::get('/section/{id}', [SectionDisplayController::class,'displaySection'])-> name('sections.show');
+Route::get('/subsection/{id}', [ThreadController::class, 'subsectionThreadList']) -> name('thread.list.show');
+Route::get('/thread/{id}', [ThreadController::class, 'showSingleThread']) -> name('single.thread.show');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

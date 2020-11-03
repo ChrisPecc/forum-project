@@ -25,7 +25,14 @@ class PostSeeder extends Seeder
         DB::table('posts')-> insert([
             'post_content' => 'Vivamus in sodales neque, at dignissim ligula. Aliquam porta tempor sapien nec auctor. Aliquam non diam at sem ultricies vulputate. Sed imperdiet sem ac urna lacinia, at accumsan dolor faucibus. Mauris tempor, arcu sit amet semper hendrerit, dolor purus rhoncus lacus, id facilisis elit magna eget metus. Mauris in dapibus felis, ut euismod felis. ',
             'user_id' => 1,
-            'thread_id' => 17,
+            'thread_id' => 2,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('posts')-> insert([
+            'post_content' => ' Praesent non nulla iaculis, imperdiet eros vitae, pellentesque libero. ',
+            'user_id' => 1,
+            'thread_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }

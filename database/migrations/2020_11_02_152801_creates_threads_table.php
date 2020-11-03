@@ -18,6 +18,7 @@ class CreatesThreadsTable extends Migration
             $table->string('thread_name');
             $table->foreignId('user_id');
             $table->foreignId('subsection_id');
+            $table->boolean('is_locked')->default(false);
             $table->timestamps();
         });
     }
