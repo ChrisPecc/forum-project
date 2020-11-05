@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatesThreadsTable extends Migration
+class CreatesRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreatesThreadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('threads', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('thread_name');
-            $table->foreignId('user_id');
-            $table->foreignId('subsection_id');
-            $table->foreignId('section_id');
-            $table->boolean('is_locked')->default(false);
+            $table->string('role');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreatesThreadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('threads');
+        Schema::dropIfExists('roles');
     }
 }

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SectionSeeder::class,
             SubsectionSeeder::class,
+            RoleSeeder::class,
             ThreadSeeder::class,
             PostSeeder::class
         ]);

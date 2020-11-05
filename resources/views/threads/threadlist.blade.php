@@ -3,6 +3,12 @@
 @section('content')
 <div class="container">
     <div class="card-body">
+        <form action="{{ route('thread.create', $subsection -> id)}}" method="post">
+            @csrf
+            @method('GET')
+            <button class="btn btn-primary" type="submit">Nouveau Sujet</button>
+        </form>
+
         <table class="table table-bordered">
             <tr class="thead-light">
                 <th scope="colgroup" colspan="2">{{ $subsection -> subsection_name }}</th>

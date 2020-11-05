@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Subsection;
 use App\Models\Thread;
 use App\Models\Post;
@@ -22,5 +23,42 @@ class ThreadController extends Controller
         $thread = Thread::where('id', $id)->firstOrFail();
 
         return view ('threads/singlethread', ['posts'=> $posts, 'thread' => $thread]);
+    }
+
+    public function createNewThread($id) {
+        $subsection = Subsection::where('id', $id)->firstOrFail();
+        return view ('threads/create', ['subsection' => $subsection]);
+    }
+
+    public function store(Request $request) {
+        $data = $request->validate([
+            'section_id' =>['required', 'string'],
+            'subsection_id' => ['required', 'string'],
+            'thread_name' => ['required', 'unique:threads', 'max:255'],
+            'post_content' => ['required', 'max:2047']
+        ]);
+
+        $user = Auth::user();
+
+        $thread = new Thread([
+            'thread_name' => $data['thread_name'],
+            'subsection_id' => $data['subsection_id'],
+            'section_id' => $data['section_id']
+        ]);
+
+        $thread-> user()->associate($user);
+        $thread->save();
+
+        $post = new Post([
+            'post_content' => $data['post_content'],
+            'section_id' => $data['section_id'],
+            "is_first_of_thread" => true
+        ]);
+
+        $post->user()->associate($user);
+        $post->thread()->associate($thread);
+        $post->save();
+
+        return \Redirect::route('single.thread.show', [$thread->id]);
     }
 }

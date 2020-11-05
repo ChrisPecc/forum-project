@@ -5,8 +5,11 @@
     <div class="card-body">
             @foreach ($sections as $section)
                 @if (
-                    $section -> id <= 2 ||
-                    ($section -> id > 2 && Auth::check())
+                    ($section -> section_name === 'Général' )||
+                    ($section -> section_name === 'Informatique' )||
+                    ($section -> section_name === 'Forum' && Auth::check()) ||
+                    ($section -> section_name === 'VIP' && Auth::check() && (Auth::user() -> role -> role === 'VIP' || Auth::user() -> role -> role === 'moderator' || Auth::user() -> role -> role === 'admin')) ||
+                    ($section -> section_name === 'Modérateurs' && Auth::check() && (Auth::user() -> role -> role === 'moderator' || Auth::user() -> role -> role === 'admin')) 
                 )
                 <table class="table table-bordered">
                     <tr class="thead-light">

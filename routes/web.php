@@ -17,10 +17,14 @@ use App\Http\Controllers\ThreadController;
 */
 
 Route::get('/', [SectionDisplayController::class, 'welcome']) -> name('welcome');
-Route::get('/section/{id}', [SectionDisplayController::class,'displaySection'])-> name('sections.show');
-Route::get('/subsection/{id}', [ThreadController::class, 'subsectionThreadList']) -> name('thread.list.show');
-Route::get('/thread/{id}', [ThreadController::class, 'showSingleThread']) -> name('single.thread.show');
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/section/{id}', [SectionDisplayController::class,'displaySection'])-> name('sections.show');
+Route::get('/subsection/{id}', [ThreadController::class, 'subsectionThreadList']) -> name('thread.list.show');
+
+Route::get('/thread/{id}', [ThreadController::class, 'showSingleThread'])-> name('single.thread.show');
+Route::get('/subsection/{id}/thread/new', [ThreadController::class, 'createNewThread'])-> name('thread.create');
+Route::post('/thread/new', [ThreadController::class, 'store'])-> name('thread.store'); 

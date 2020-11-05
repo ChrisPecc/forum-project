@@ -14,6 +14,8 @@ class Post extends Model
         'user_id',
         'post_content',
         'thread_id',
+        'section_id',
+        'is_first_of_thread',
         'created_at',
         'updated_at'
     ];

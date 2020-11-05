@@ -18,6 +18,8 @@ class CreatesPostsTable extends Migration
             $table->foreignId('user_id');
             $table->text('post_content');
             $table->foreignId('thread_id');
+            $table->foreignId('section_id');
+            $table->boolean('is_first_of_thread')->default(false);
             $table->timestamps();
         });
     }
