@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="card-body">
-        <form action="{{ route('thread.create', $subsection -> id)}}" method="post">
+        <form action="{{ route('thread.create', $subsection -> id)}}" method="get">
             @csrf
             @method('GET')
-            <button class="btn btn-primary" type="submit">Nouveau Sujet</button>
+            <button class="btn btn-primary float-right my-2" type="submit">Nouveau Sujet</button>
         </form>
 
         <table class="table table-bordered">

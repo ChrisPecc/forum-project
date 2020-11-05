@@ -23,5 +23,9 @@ class Section extends Model
     public function subsections(){
         return $this->hasMany('App\Models\Subsection');
     }
+
+    public function threads() {
+        return $this->hasMany('App\Models\Thread');
+    }
     
 }

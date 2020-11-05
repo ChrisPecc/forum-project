@@ -32,4 +32,8 @@ class Thread extends Model
     public function posts(){
         return $this->hasMany('App\Models\Post');
     }
+
+    public function section(){
+        return $this->belongsTo('App\Models\Section');
+    }
 }

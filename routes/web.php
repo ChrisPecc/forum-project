@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SectionDisplayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,7 @@ Route::get('/subsection/{id}', [ThreadController::class, 'subsectionThreadList']
 
 Route::get('/thread/{id}', [ThreadController::class, 'showSingleThread'])-> name('single.thread.show');
 Route::get('/subsection/{id}/thread/new', [ThreadController::class, 'createNewThread'])-> name('thread.create');
-Route::post('/thread/new', [ThreadController::class, 'store'])-> name('thread.store'); 
+Route::post('/subsection/{id}/thread/store', [ThreadController::class, 'store'])-> name('thread.store');
+
+Route::get('thread/{id}/post/new', [PostController::class, 'create'])-> name('post.create');
+Route::post('thread/{id}/post/store', [PostController::class, 'store'])-> name('post.store');

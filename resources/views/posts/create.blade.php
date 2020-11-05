@@ -4,22 +4,17 @@
 <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{$subsection-> section-> section_name}} > {{$subsection-> subsection_name}}</div>
+                <div class="card-header">
+                    {{$thread-> section -> section_name}} > {{$thread-> subsection -> subsection_name}} > {{ $thread -> thread_name}}
+                </div>
 
                 <div class="card-body">
-                    <form method="post" enctype="multipart/form-data" action="{{route('thread.store', $subsection-> id)}}">
+                    <form method="post" enctype="multipart/form-data" action="{{route('post.store', $thread-> id)}}">
                         @csrf
                         @method('POST')
 
-                        <div class="form-group row">
-                            <label for="thread_name" class="col-md-2 col-form-label text-md-right">Titre</label>
-
-                            <div class="col-md-8">
-                                <input type="text" id="thread_name" class="form-control @error('description') is-invalid @enderror" name="thread_name" required>
-                            </div>
-                        </div>
+                        <input type="hidden" id="thread_id" class="form-control" name="thread_id" value="{{$thread-> id}}">
                         
-
                         <div class="form-group row">
                             <label for="post_content" class="col-md-2 col-form-label text-md-right">Post</label>
 
@@ -32,7 +27,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-2 text-right">
-                                <a class="mx-2" href="{{route('thread.list.show', $subsection->id)}}">Retour</a>
+                                <a class="mx-2" href="{{route('single.thread.show', $thread-> id)}}">Retour</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Valider') }}
                                 </button>

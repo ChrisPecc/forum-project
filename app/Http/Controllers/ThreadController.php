@@ -30,20 +30,20 @@ class ThreadController extends Controller
         return view ('threads/create', ['subsection' => $subsection]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request, $id) {
         $data = $request->validate([
-            'section_id' =>['required', 'string'],
-            'subsection_id' => ['required', 'string'],
             'thread_name' => ['required', 'unique:threads', 'max:255'],
             'post_content' => ['required', 'max:2047']
         ]);
 
         $user = Auth::user();
 
+        $subsection = Subsection::where('id', $id)->firstOrFail();
+
         $thread = new Thread([
             'thread_name' => $data['thread_name'],
-            'subsection_id' => $data['subsection_id'],
-            'section_id' => $data['section_id']
+            'subsection_id' => $subsection-> id ,
+            'section_id' => $subsection->section-> id
         ]);
 
         $thread-> user()->associate($user);
@@ -51,7 +51,7 @@ class ThreadController extends Controller
 
         $post = new Post([
             'post_content' => $data['post_content'],
-            'section_id' => $data['section_id'],
+            'section_id' => $subsection->section-> id,
             "is_first_of_thread" => true
         ]);
 
