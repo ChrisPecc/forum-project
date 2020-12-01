@@ -30,5 +30,11 @@ Route::get('/thread/{id}', [ThreadController::class, 'showSingleThread'])-> name
 Route::get('/subsection/{id}/thread/new', [ThreadController::class, 'createNewThread'])-> name('thread.create');
 Route::post('/subsection/{id}/thread/store', [ThreadController::class, 'store'])-> name('thread.store');
 
-Route::get('thread/{id}/post/new', [PostController::class, 'create'])-> name('post.create');
-Route::post('thread/{id}/post/store', [PostController::class, 'store'])-> name('post.store');
+//posts
+
+Route::get('/thread/{id}/post/new', [PostController::class, 'create'])-> name('post.create');
+Route::post('/thread/{id}/post/store', [PostController::class, 'store'])-> name('post.store');
+
+Route::get('/post/{post_id}/edit', [PostController::class, 'edit'])-> name('post.edit');
+Route::put('/post/{post_id}/update', [PostController::class, 'postUpdate'])-> name('post.update');
+Route::delete('/post/{post_id}/delet', [PostController::class, 'postDelete'])-> name ('post.delete');

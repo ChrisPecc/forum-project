@@ -22,7 +22,16 @@
                     <td >
                         <div class="d-flex flex-column">
                             <div>
-                                <button class="btn btn-primary btn-sm float-right" type="submit">Editer</button>
+                                <form action="{{route('post.delete', $post -> id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-primary btn-sm float-right" type="submit">Effacer</button>
+                                </form>
+                                <form action="{{route('post.edit', $post -> id)}}" method="get">
+                                    @csrf
+                                    @method('GET')
+                                    <button class="btn btn-primary btn-sm float-right mx-2" type="submit">Editer</button>
+                                </form>
                             </div>
                             <div class="p-1">
                                 {{ $post-> post_content }}

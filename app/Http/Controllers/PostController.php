@@ -37,4 +37,40 @@ class PostController extends Controller
 
         return \Redirect::route('single.thread.show', [$thread->id]);
     }
+
+    public function edit($post_id){
+        $post = Post::find($post_id);
+
+        return view('posts/edit', ['post' => $post]);
+    }
+
+    public function postUpdate(Request $request, $post_id) {
+        $data = $request->validate([
+            'post_content' => ['required', 'max:2047']
+        ]);
+
+        $post = Post::find($post_id);
+
+        $post-> update(['post_content' => $data['post_content']]);
+
+        return \Redirect::route('single.thread.show', [$post-> thread->id]);
+    }
+
+    public function postDelete($post_id){
+        $post = Post::find($post_id);
+        error_log($post-> is_first_of_thread);
+
+        if ($post-> is_first_of_thread === 1) {
+            error_log("c'est le premier post");
+            return \Redirect::route('single.thread.show', [$post-> thread->id]);
+        }
+        else {
+            $post-> delete();
+            error_log("ce n'est pas le premier post");
+            
+            return \Redirect::route('single.thread.show', [$post-> thread->id]);
+
+        }
+
+    }
 }
