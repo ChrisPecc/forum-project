@@ -32,8 +32,9 @@ Route::post('/subsection/{id}/thread/store', [ThreadController::class, 'store'])
 
 //posts
 
-Route::get('/thread/{id}/post/new', [PostController::class, 'create'])-> name('post.create');
-Route::post('/thread/{id}/post/store', [PostController::class, 'store'])-> name('post.store');
+Route::get('/thread/{thread}/post/new', [PostController::class, 'create'])-> name('post.create');
+Route::post('/thread/{thread}/post/store', [PostController::class, 'store'])-> name('post.store');
+Route::get('/thread/{thread_id}/post/quote/{post_id}/new', [PostController::class, 'createWithQuote'])-> name ('post.quote.create');
 
 Route::get('/post/{post_id}/edit', [PostController::class, 'edit'])-> name('post.edit');
 Route::put('/post/{post_id}/update', [PostController::class, 'postUpdate'])-> name('post.update');

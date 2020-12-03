@@ -41,7 +41,7 @@ class ThreadController extends Controller
         $subsection = Subsection::where('id', $id)->firstOrFail();
 
         $thread = new Thread([
-            'thread_name' => $data['thread_name'],
+            'thread_name' => strip_tags($data['thread_name']),
             'subsection_id' => $subsection-> id ,
             'section_id' => $subsection->section-> id
         ]);
@@ -49,8 +49,10 @@ class ThreadController extends Controller
         $thread-> user()->associate($user);
         $thread->save();
 
+        $poststripped = strip_tags($data['post_content'],'<p><q><blockquote><i><b><ul><ol><li><p>');
+
         $post = new Post([
-            'post_content' => $data['post_content'],
+            'post_content' => $poststripped,
             'section_id' => $subsection->section-> id,
             "is_first_of_thread" => true
         ]);

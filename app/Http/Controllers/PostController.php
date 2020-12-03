@@ -11,10 +11,19 @@ use App\Models\Post;
 class PostController extends Controller
 {
     //
-    public function create($id){
-        $thread = Thread::where('id', $id)->firstOrFail();
+    public function create(Thread $thread){
+        // $thread = Thread::where('id', $id)->firstOrFail();
+        error_log($thread);
+        $this-> authorize('create', $thread);
 
         return view('posts/create', ['thread' => $thread]);
+    }
+
+    public function createWithQuote($id, $post_id) {
+        $thread = Thread::find($id);
+        $quotedmessage = Post::find($post_id);
+
+        return view('posts/createwithquote', ['thread' => $thread, 'quotedmessage'=> $quotedmessage]);
     }
 
     public function store(Request $request, $id) {
@@ -26,8 +35,9 @@ class PostController extends Controller
 
         $thread = Thread::where('id', $id)->firstOrFail();
 
+        $poststripped = strip_tags($data['post_content'],'<p><q><blockquote><i><b><ul><ol><li><p>');
         $post = new Post([
-            'post_content' => $data['post_content'],
+            'post_content' => $poststripped,
             'section_id' => $thread -> section -> id
         ]);
 
@@ -51,7 +61,9 @@ class PostController extends Controller
 
         $post = Post::find($post_id);
 
-        $post-> update(['post_content' => $data['post_content']]);
+        $poststripped = strip_tags($data['post_content'],'<p><q><blockquote><i><b><ul><ol><li><p>');
+
+        $post-> update(['post_content' => $poststripped]);
 
         return \Redirect::route('single.thread.show', [$post-> thread->id]);
     }
